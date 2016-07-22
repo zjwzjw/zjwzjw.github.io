@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		 body{
+		 	-webkit-perspective:800px;
+		 	-webkit-perspective-origin: 50% -90%;
+		 }
+		 #container{
+            width: 125px;
+            height: 125px;
+            margin: 200px auto;
+            /*background: #ff0000;*/
+            -webkit-transform-style: preserve-3d;
+            -webkit-transition: all 1s linear;
+        }
+        #container img{
+            width: 125px;
+            height: 125px;
+            position: absolute;
+            -webkit-transition: all 1s linear;
+        }                 
+
+
+
+	</style>
+</head>
+<body>
+	<div id="container"></div>
+	<script>
+		var oContainer = document.querySelector('#container');
+		var html = '';
+		var index = 1;
+		var count = 0;
+		for (var i = 0; i < 9; i++) {
+			var oImg = new Image();
+			oImg.onload = function(){
+				count++;
+				if (count == 9){
+					var aImg = oContainer.querySelectorAll('img'); 
+					for (var i = 0; i < aImg.length; i++){
+				(function(idx){
+                            setTimeout(function(){
+
+
+                                aImg[idx].style.transform = 'rotateY('+40*(9-idx)+'deg) translateZ(200px)';
+                            }, (9-idx)*100);
+                        })(i);
+					}
+
+				}
+
+
+			};
+			oImg.src = 'img/thumbs/'+ (i + 1) +'.jpg';
+			  oContainer.appendChild(oImg);
+		}
+
+
+
+		oContainer.addEventListener('click',function(){
+			this.style.WebKiteTransform = 'rotateY('+40*index+'deg)';
+			index++;
+		});
+
+
+// var oContainer = document.querySelector('#container');
+//         var html = '';
+//         var index = 1;
+//         var count = 0;
+//         for(var i=0; i<9; i++){
+// //            html += '<img src="img/thumbs/'+ (i + 1) +'.jpg">';
+//             var oImg = new Image();
+//             oImg.onload = function(){
+//                 count++;
+//                 if(count == 9){
+//                     var aImg = oContainer.querySelectorAll('img');
+//                     for(var i=0; i<aImg.length; i++){
+// //                        aImg[i].style.transitionDelay = i * 100 + 'ms';
+//                         (function(idx){
+//                             setTimeout(function(){
+
+
+//                                 aImg[idx].style.transform = 'rotateY('+40*(9-idx)+'deg) translateZ(200px)';
+//                             }, (9-idx)*100);
+//                         })(i);
+
+//                     }
+//                 }
+//             };
+//             oImg.src = 'img/thumbs/'+ (i + 1) +'.jpg';
+//             oContainer.appendChild(oImg);//父元素.appendChild(子元素);
+
+
+//         }
+
+
+//         //setTimeout(function(){
+
+//       //  }, 0);
+
+//         oContainer.addEventListener('click', function(){
+//             this.style.WebkitTransform = 'rotateY('+40*index+'deg)';   
+//             index++;
+//         });
+
+
+
+
+
+
+	</script>
+</body>
+</html>
