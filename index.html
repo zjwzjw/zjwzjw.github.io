@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
+</head>
+
 <style>
 *{
 	margin: 0;
@@ -65,12 +68,33 @@ img{
 	position:absolute;
 	}
 /*******banner结束********/
+/*******container开始********/
+ 		
+		 #container{
+            width: 125px;
+            height: 125px;
+            margin:  0 auto;
+            margin-top: 50px;
+            /*background: #ff0000;*/
+            -webkit-transform-style: preserve-3d;
+            -webkit-transition: all 1s linear;
+            -webkit-perspective:800px;
+		 	-webkit-perspective-origin: 30% -90%;
+        }
+        #container img{
+            width: 125px;
+            height: 125px;
+            position: absolute;
+            -webkit-transition: all 1s linear;
+        }                 
+
+
+
+/*******container结束********/
 
 
 </style>
 	
-
-</head>
 <body>
 
 <div id="nav">
@@ -85,9 +109,56 @@ img{
 	</ul>
   	</div>
   </div>
-  <div id="banner">
-  <img src="个人主页/img/horse2.png" alt="">
-  </div>
+
+  <<!-- div id="banner">
+  <img src="img/horse2.png" alt="">
+  		<div id="container"></div>
+  </div> -->
+
+  <div id="container"></div>
+
+  
+  <script>
+		var oContainer = document.querySelector('#container');
+		var html = '';
+		var index = 1;
+		var count = 0;
+		for (var i = 0; i < 9; i++) {
+			var oImg = new Image();
+			oImg.onload = function(){
+				count++;
+				if (count == 9){
+					var aImg = oContainer.querySelectorAll('img'); 
+					for (var i = 0; i < aImg.length; i++){
+				(function(idx){
+                            setTimeout(function(){
+
+
+                                aImg[idx].style.transform = 'rotateY('+40*(9-idx)+'deg) translateZ(200px)';
+                            }, (9-idx)*100);
+                        })(i);
+					}
+
+				}
+
+
+			};
+			oImg.src = 'img/thumbs/'+ (i + 1) +'.jpg';
+			  oContainer.appendChild(oImg);
+		}
+
+
+
+		oContainer.addEventListener('click',function(){
+			this.style.WebKiteTransform = 'rotateY('+ 40*index +'deg)';
+			index++;
+		});
+
+
+// 
+
+
+	</script>
 
 
 </body>
